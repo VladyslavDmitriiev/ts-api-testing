@@ -18,21 +18,16 @@ export default class PetController {
   }
 
   async addNew(pet: {
-    "id": number,
     "category": {
       "id": number,
       "name": string
     },
     "name": string,
-    "photoUrls": [
-      string
-    ],
-    "tags": [
-      {
+    "photoUrls": string[],
+    "tags": {
         "id": number,
         "name": string
-      }
-    ],
+      }[],
     "status": string
   }) {
     const response = await got(this.baseUrl, {
@@ -56,15 +51,11 @@ export default class PetController {
       "name": string
     },
     "name": string,
-    "photoUrls": [
-      string
-    ],
-    "tags": [
-      {
+    "photoUrls": string[],
+    "tags": {
         "id": number,
         "name": string
-      }
-    ],
+      }[],
     "status": string
   }) {
     const response = await got(this.baseUrl, {

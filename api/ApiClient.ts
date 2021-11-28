@@ -7,12 +7,7 @@ export class ApiClient {
 
 
   constructor(baseUrl?: string) {
-    if (baseUrl) {
-      this.baseUrl = baseUrl
-    } else {
-      this.baseUrl = 'http://localhost/v2/pet/'
-    }
-    
+    this.baseUrl = baseUrl ? baseUrl : 'http://localhost/v2/pet/'
     this.pet = new PetController(this.baseUrl)
   }
 
