@@ -9,7 +9,8 @@ describe('User can', () => {
   })
   test('receive pet by his status', async function () {
     const api = new ApiClient()
-    let body: any[] = await api.pet.findByStatus(['sold', 'available'])
+    let body: any[] = await api.pet.findByStatus('sold') //['sold', 'available']
+    console.log(body)
     expect(body.map(pet => pet.status)).toContain('sold')
     expect(body.map(pet => pet.status)).toContain('available')
     expect(body.map(pet => pet.status)).not.toContain('pending')
@@ -17,7 +18,7 @@ describe('User can', () => {
     body = await api.pet.findByStatus('pending')
     expect(body.map(pet => pet.status)).toContain('pending')
   })
-  test('create, update, delete a pet', async () => {
+  test.only('create, update, delete a pet', async () => {
     const api = new ApiClient()
     
     // Create
@@ -45,23 +46,23 @@ describe('User can', () => {
     let petToUpdate = {
       "id": createdPet.id,
       "category": {
-        "id": 0,
-        "name": "cat"
+        "id": 1,
+        "name": "dog"
       },
-      "name": "Leo",
+      "name": "Gomer",
       "photoUrls": [''],
       "tags": [
         {
-          "id": 0,
-          "name": "bengal"
+          "id": 1,
+          "name": "bulldog"
         }
       ],
       "status": "sold"
     }
     let updatedPet = await api.pet.update(petToUpdate)
-    expect(updatedPet.status).toEqual('sold')
+    expect(updatedPet).toStrictEqual(petToUpdate)
     let foundUpdatedPet = await api.pet.findById(updatedPet.id)
-    expect(foundUpdatedPet.status).toEqual('sold')
+    expect(foundUpdatedPet).toStrictEqual(petToUpdate)
     
     // Delete
     let deletedPet = await api.pet.delete(updatedPet.id)
