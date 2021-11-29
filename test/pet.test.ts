@@ -2,15 +2,14 @@ import { ApiClient } from '../api/ApiClient'
 
 
 describe('User can', () => {
-  test('receive pet by his id', async function () {
+  test('receive pet by his id', async () => {
     const api = new ApiClient()
     let body = await api.pet.findById('1')
     expect(body.id).toEqual(1)
   })
-  test('receive pet by his status', async function () {
+  test('receive pet by his status', async () => {
     const api = new ApiClient()
-    let body: any[] = await api.pet.findByStatus('sold') //['sold', 'available']
-    console.log(body)
+    let body: any[] = await api.pet.findByStatus(['sold', 'available'])
     expect(body.map(pet => pet.status)).toContain('sold')
     expect(body.map(pet => pet.status)).toContain('available')
     expect(body.map(pet => pet.status)).not.toContain('pending')
@@ -18,7 +17,7 @@ describe('User can', () => {
     body = await api.pet.findByStatus('pending')
     expect(body.map(pet => pet.status)).toContain('pending')
   })
-  test.only('create, update, delete a pet', async () => {
+  test('create, update, delete a pet', async () => {
     const api = new ApiClient()
     
     // Create
@@ -66,7 +65,6 @@ describe('User can', () => {
     
     // Delete
     let deletedPet = await api.pet.delete(updatedPet.id)
-    console.log(deletedPet)
     expect(deletedPet.code).toEqual(200)
   })
 })

@@ -16,8 +16,8 @@ export class HttpRequestBuilder {
     return this
   }
 
-  public searchParams(serchParams: Options['searchParams']): this {
-    this.options.serchParams = serchParams
+  public searchParams(searchParams: Options['searchParams']): this {
+    this.options.searchParams = searchParams
     return this
   }
 

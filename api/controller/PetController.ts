@@ -1,6 +1,6 @@
-import got from 'got'
-import { URLSearchParams } from 'url'
 import { HttpRequestBuilder as request} from '../HttpRequestBuilder'
+import { URLSearchParams } from 'url'
+
 
 export default class PetController {
   public baseUrl: string
