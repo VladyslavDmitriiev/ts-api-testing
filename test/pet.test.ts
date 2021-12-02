@@ -1,5 +1,5 @@
 import { ApiClient } from '../api/ApiClient'
-
+import { definitions } from '../.temp/types'
 
 describe('User can', () => {
   test('receive pet by his id', async () => {
@@ -21,7 +21,7 @@ describe('User can', () => {
     const api = new ApiClient()
     
     // Create
-    let petToCreate = {
+    let petToCreate: Omit<definitions['Pet'], 'id' > = {
       "category": {
         "id": 0,
         "name": "cat"
@@ -42,7 +42,7 @@ describe('User can', () => {
     expect(foundAddedPet).toStrictEqual({...petToCreate, id: createdPet.id})
 
     // Update
-    let petToUpdate = {
+    let petToUpdate: definitions['Pet'] = {
       "id": createdPet.id,
       "category": {
         "id": 1,

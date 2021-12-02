@@ -1,6 +1,6 @@
 import { HttpRequestBuilder as request} from '../HttpRequestBuilder'
 import { URLSearchParams } from 'url'
-
+import { definitions } from '../../.temp/types'
 
 export default class PetController {
   public baseUrl: string
@@ -26,19 +26,7 @@ export default class PetController {
     ).body
   }
 
-  async addNew(pet: {
-    "category": {
-      "id": number,
-      "name": string
-    },
-    "name": string,
-    "photoUrls": string[],
-    "tags": {
-        "id": number,
-        "name": string
-      }[],
-    "status": string
-  }) {
+  async addNew(pet: Omit<definitions['Pet'], "id">) {
     return (
       await new request()
         .url(this.baseUrl)
@@ -57,20 +45,7 @@ export default class PetController {
     ).body
   }
 
-  async update(pet: {
-    "id": number,
-    "category": {
-      "id": number,
-      "name": string
-    },
-    "name": string,
-    "photoUrls": string[],
-    "tags": {
-        "id": number,
-        "name": string
-      }[],
-    "status": string
-  }) {
+  async update(pet: definitions['Pet']) {
     return (
       await new request()
         .url(this.baseUrl)
@@ -80,3 +55,17 @@ export default class PetController {
     ).body
   }
 }
+
+
+// pet: {
+//   "category": {
+//     "id": number,
+//     "name": string
+//   },
+//   "name": string,
+//   "photoUrls": string[],
+//   "tags": {
+//       "id": number,
+//       "name": string
+//     }[],
+//   "status": string

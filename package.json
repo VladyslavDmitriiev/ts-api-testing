@@ -2,6 +2,7 @@
   "name": "api-testing-project",
   "version": "1.0.0",
   "scripts": {
+    "postinstall": "npm run pretest",
     "pretest": "openapi-typescript http://localhost/v2/swagger.json --output ./.temp/types.ts",
     "test": "jest"
   },
